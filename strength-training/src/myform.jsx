@@ -25,7 +25,7 @@ class MyFormComponent extends Component {
       this.state = {...this.props.contacts[this.index]};
     } else {
       this.state = {
-        key: '', name: 'NONE', address: 'NONE', city: 'lafayette', email:'', phoneNumber: 'number', state:'La', zip:'70501',
+        key: uid(), userId: "", date: 'NONE', exersise: 'NONE', weight: 'lbs', distance:'', time: 'number',
       };
     }
   }
@@ -46,10 +46,9 @@ class MyFormComponent extends Component {
 
   handle_submit(event) {
 
-    console.log('Submitted:' , this.state.name, this.state.address, this.state.phoneNumber, this.state.email, this.state.city, this.state.state, this.state.zip);
-    var infomation = {key: uid(), name: this.state.name, address: this.state.address, email: this.state.email, city: this.state.city,
-    state: this.state.state, zip: this.state.zip, phoneNumber: this.state.phoneNumber,
-    clicked: false}
+    console.log('Submitted:' , this.state.userId, this.state.date, this.state.exersise, this.state.weight, this.state.distance, this.state.time);
+    var infomation = {key: uid(), name: this.state.date, address: this.state.exersise, email: this.state.weight, city: this.state.distance,
+    state: this.state.time, clicked: false}
     // var tempState = this.state.contacts;
     // tempState.push(infomation);
 
@@ -57,33 +56,13 @@ class MyFormComponent extends Component {
     //this.sort_contacts(tempState);
     event.preventDefault();
 
-
-    this.props.onSubmit({key: uid(), name: this.state.name, address: this.state.address, email: this.state.email, city: this.state.city, state: this.state.state, zip: this.state.zip, phoneNumber: this.state.phoneNumber, clicked: false});
+    this.props.onSubmit({key: uid(), name: this.state.userId, address: this.state.date, email: this.state.exersise, city: this.state.weight, state: this.state.distance, clicked: false});
     this.props.history.push("/");
   }
-
 
 updatePerson(event) {
     console.log(this.index, this.state);
     this.props.onChange(this.index, {...this.state});
-    this.props.history.push("/");
-  }
-
-
-
-  sort_contacts(temp_contacts) {
-     var sorted = temp_contacts.sort(function(a, b){
-     var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase();
-     if (nameA < nameB) //sort string ascending
-      return -1;
-     if (nameA > nameB)
-      return 1;
-     return 0; //default return value (no sorting)
-    });
-
-    this.setState({contacts: sorted});
-    this.setStorage(sorted);
-
     this.props.history.push("/");
   }
 
@@ -92,29 +71,29 @@ updatePerson(event) {
       <div>
         <Card className="md-card">
           <form onSubmit={event => this.handle_submit(event)}>
-            <CardTitle title="Contact Form" subtitle=""/>
+            <CardTitle title="Workout Form" subtitle=""/>
             <CardText>
-              <TextField floatingLabelText="Your Name"
-                defaultValue={this.state.name}
-                onChange={event => this.update_state(event, 'name')}/>
-              <TextField floatingLabelText="address"
-                defaultValue={this.state.address}
-                onChange={event => this.update_state(event, 'address')}/>
-              <TextField floatingLabelText="Phone Number"
-                defaultValue={this.state.phoneNumber}
-                onChange={event => this.update_state(event, 'phoneNumber')}/>
-              <TextField floatingLabelText="email"
-                defaultValue={this.state.email}
-                onChange={event => this.update_state(event, 'email')}/>
-              <TextField floatingLabelText="city"
-                defaultValue={this.state.city}
-                onChange={event => this.update_state(event, 'city')}/>
-              <TextField floatingLabelText="state"
-                defaultValue={this.state.state}
-                onChange={event => this.update_state(event, 'state')}/>
-              <TextField floatingLabelText="zip"
-                defaultValue={this.state.zip}
-                onChange={event => this.update_state(event, 'zip')}/>
+              <TextField floatingLabelText="User Id"
+                defaultValue={this.state.userId}
+                onChange={event => this.update_state(event, 'userId')}/>
+              <TextField floatingLabelText="date"
+                defaultValue={this.state.date}
+                onChange={event => this.update_state(event, 'date')}/>
+              <TextField floatingLabelText="Exersise"
+                defaultValue={this.state.exersise}
+                onChange={event => this.update_state(event, 'exersise')}/>
+              <TextField floatingLabelText="weight"
+                defaultValue={this.state.weight}
+                onChange={event => this.update_state(event, 'weight')}/>
+              <TextField floatingLabelText="reps"
+                defaultValue={this.state.reps}
+                onChange={event => this.update_state(event, 'reps')}/>
+              <TextField floatingLabelText="distance"
+                defaultValue={this.state.distance}
+                onChange={event => this.update_state(event, 'distance')}/>
+              <TextField floatingLabelText="time"
+                defaultValue={this.state.time}
+                onChange={event => this.update_state(event, 'time')}/>
 
             </CardText>
             <CardActions>

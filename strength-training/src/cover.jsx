@@ -8,10 +8,16 @@ import FileFolder from 'material-ui/svg-icons/file/folder';
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import {blue500, yellow600} from 'material-ui/styles/colors';
 import EditorInsertChart from 'material-ui/svg-icons/editor/insert-chart';
+
+import {Link} from 'react-router-dom';
 import startpng from './start.png';
+import MyForm from './myform';
+import './App.css';
+
 
 const ListExampleFolder = () => (
-<div style={{backgroundImage: `url(${startpng})`}}>
+<div className = "link">
+
     <List>
       <Subheader inset={true}>Please Sign In</Subheader>
       <ListItem
@@ -19,13 +25,16 @@ const ListExampleFolder = () => (
         rightIcon={<ActionInfo />}
         primaryText="Login"
       />
+      <Link to={'/add'}>
       <ListItem
         leftAvatar={<Avatar icon={<FileFolder />} />}
         rightIcon={<ActionInfo />}
         primaryText="Logout"
       />
+      </Link>
     </List>
     <Divider inset={true} />
+    <Link to={'/add'}>
     <List>
       <Subheader inset={true}>Training</Subheader>
       <ListItem
@@ -35,6 +44,10 @@ const ListExampleFolder = () => (
         secondaryText="Jan 20, 2014"
       />
     </List>
+    </Link>
+
+
+
 </div>
 );
 
