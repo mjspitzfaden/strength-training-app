@@ -12,6 +12,7 @@ import MyForm from './myform';
 import MyList from './list';
 import startpng from './start.png';
 import Picture from './picture';
+import Nav from './nav';
 
 
 
@@ -37,6 +38,7 @@ class App extends Component {
           <Picture>
             <div>
               <AppBar title="Strength and Training"/>
+              <Nav />
               <Switch>
 
                 <Route exact path="/" component={ListExampleFolder}/>

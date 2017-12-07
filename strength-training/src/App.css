@@ -4,6 +4,7 @@
 
 .link {
   width: 20em;
+  background-color: cadetblue;
 }
 
 html, body, #root, .pict {

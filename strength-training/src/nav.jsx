@@ -1,11 +1,13 @@
 import MyList from './list';
-import MyDelete from './delete';
 import React, { Component } from 'react';
 import {loggedIn} from './actions.js';
-
-
-
-
+import * as firebase from "firebase";
+import {BrowserRouter, Route, Link, Switch, Redirect}
+  from 'react-router-dom';
+import { auth } from './database';
+import {loggedOut, removeUser} from './actions';
+import { connect } from 'react-redux';
+import database, {user} from './database';
 
 
 class Nav extends Component {
@@ -48,8 +50,6 @@ log_out(){
   render() {
     return (
       <ul>
-        <li><Link to="/">List</Link></li>
-        <li><Link to="/add">Add Form</Link></li>
         <li>{this.auth_button()}</li>
       </ul>
     )
@@ -73,3 +73,6 @@ function mapDispatchToProps (dispatch) {
     }
   }
 }
+var NavConnected = connect(mapStateToProps, mapDispatchToProps)(Nav);
+
+export default Nav;

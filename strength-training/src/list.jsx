@@ -19,11 +19,6 @@ class MyListComponent extends Component {
 
     this.history = props.history;
 
-
-    this.state = {
-      key: '', name: 'NONE', address: 'NONE', city: 'lafayette', email:'', phoneNumber: 'number', state:'La', zip:'70501',
-    };
-
   }
 
 
@@ -47,13 +42,13 @@ render() {
     console.log('person is',person)
     if(person.clicked){
       return (<li key={person.key} onClick={(event)=>this.showInfo(event, person.key)}>
-      {person.key}-{person.name}-{person.city}-{person.address}-{person.state}-{person.phoneNumber}-{person.email}-{person.zip}
+      {person.userId}-{person.date}-{person.exersise}-{person.weight}-{person.distance}-{person.time}
       <Link to={'/edit/' + index}>Edit</Link>
       <Link to={'/delete/' + person.key}>Delete</Link>
       </li>)
     } else {
       return (<li key={person.key} onClick={(event)=>this.showInfo(event, person.key)}>
-      {person.key}-{person.name}-{person.city}-{person.state}
+      {person.key}-{person.userId}
       <Link to={'/edit/' + index}>Edit</Link>
       <Link to={'/delete/' + person.key}>Delete</Link>
       </li>)
