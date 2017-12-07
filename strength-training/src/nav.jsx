@@ -8,6 +8,14 @@ import { auth } from './database';
 import {loggedOut, removeUser} from './actions';
 import { connect } from 'react-redux';
 import database, {user} from './database';
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Avatar from 'material-ui/Avatar';
+import FileFolder from 'material-ui/svg-icons/file/folder';
+import ActionInfo from 'material-ui/svg-icons/action/info';
+import { Provider } from 'react-redux';
+import store from './store.js';
+import uid from 'uid'
 
 
 class Nav extends Component {
@@ -41,11 +49,38 @@ log_out(){
 
   auth_button () {
     if (this.props.user.uid) {
-      return <button onClick={() => this.log_out()}>Logout</button>
+      return(
+        <List>
+        <Link to={'/add'}>
+          <Subheader inset={true}>Please Sign In</Subheader>
+          <ListItem
+            leftAvatar={<Avatar icon={<FileFolder />} />}
+            rightIcon={<ActionInfo />}
+            primaryText="Logout"
+            onClick={() => this.log_out()}
+          />
+          </Link>
+        </List>
+      )
     }
 
-    return <button onClick={() => this.login()}>Login</button>
+    return(
+    <List>
+      <Link to={'/add'}>
+      <ListItem
+        leftAvatar={<Avatar icon={<FileFolder />} />}
+        rightIcon={<ActionInfo />}
+        primaryText="Login"
+        onClick={() => this.login()}
+      />
+      </Link>
+    </List>
+   )
   }
+
+
+
+
 
   render() {
     return (
@@ -75,4 +110,4 @@ function mapDispatchToProps (dispatch) {
 }
 var NavConnected = connect(mapStateToProps, mapDispatchToProps)(Nav);
 
-export default Nav;
+export default NavConnected;

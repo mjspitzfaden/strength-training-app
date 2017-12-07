@@ -6,6 +6,8 @@ import {BrowserRouter, Route, Link, Switch, Redirect}
 import { Provider } from 'react-redux';
 import store from './store.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconButton from 'material-ui/IconButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import ListExampleFolder from './cover';
 import MyForm from './myform';
@@ -30,6 +32,16 @@ const NoMatch = ({location}) => (
 )
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {show_menu: false};
+  }
+
+  show_menu (event) {
+    console.log('show');
+    this.setState({show_menu: true});
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -37,13 +49,11 @@ class App extends Component {
         <BrowserRouter>
           <Picture>
             <div>
-              <AppBar title="Strength and Training"/>
-              <Nav />
+              <AppBar onLeftIconButtonClick={(e) => this.show_menu(e)} iconElementLeft={this.state.show_menu ? <ListExampleFolder /> : <IconButton><MoreVertIcon /></IconButton> } title="Strength and Training"/>
               <Switch>
-
-                <Route exact path="/" component={ListExampleFolder}/>
+                <Route exact path="/" />
                 <Route path="/add" component={MyForm}/>
-                <Route path="/list" componet={MyList}/>
+                <Route path="/list" component={MyList}/>
                 <Route component={NoMatch}/>
               </Switch>
             </div>

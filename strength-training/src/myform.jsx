@@ -47,20 +47,14 @@ class MyFormComponent extends Component {
   handle_submit(event) {
 
     console.log('Submitted:' , this.state.userId, this.state.date, this.state.exersise, this.state.weight, this.state.distance, this.state.time);
-    var infomation = {key: uid(), name: this.state.date, address: this.state.exersise, email: this.state.weight, city: this.state.distance,
-    state: this.state.time, clicked: false}
-    // var tempState = this.state.contacts;
-    // tempState.push(infomation);
 
-
-    //this.sort_contacts(tempState);
     event.preventDefault();
 
-    this.props.onSubmit({key: uid(), name: this.state.userId, address: this.state.date, email: this.state.exersise, city: this.state.weight, state: this.state.distance, clicked: false});
+    this.props.onSubmit({key: uid(), userId: this.state.userId, date: this.state.date, exersise: this.state.exersise, weight: this.state.weight, distance: this.state.distance, clicked: false});
     this.props.history.push("/");
   }
 
-updatePerson(event) {
+updateExersise(event) {
     console.log(this.index, this.state);
     this.props.onChange(this.index, {...this.state});
     this.props.history.push("/");
@@ -68,7 +62,7 @@ updatePerson(event) {
 
   render() {
     return (
-      <div>
+      <div className="card">
         <Card className="md-card">
           <form onSubmit={event => this.handle_submit(event)}>
             <CardTitle title="Workout Form" subtitle=""/>
@@ -98,7 +92,7 @@ updatePerson(event) {
             </CardText>
             <CardActions>
               <RaisedButton type="submit" label="Add" primary={true}/>
-              <RaisedButton label="Update" primary={true} onClick={event => this.updatePerson(event)}/>
+              <RaisedButton label="Update" primary={true} onClick={event => this.updateExersise(event)}/>
             </CardActions>
           </form>
         </Card>

@@ -9,26 +9,27 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import database from './database';
+import database, {User} from './database';
+import './App.css';
 
 import {Link} from 'react-router-dom';
 
 class MyListComponent extends Component {
   constructor(props) {
     super(props);
-
+    console.log(props)
     this.history = props.history;
 
   }
 
 
   showInfo(event, key) {
-    let personIndex = this.props.contacts.findIndex((contact)=>{
+    let exersiseIndex = this.props.contacts.findIndex((contact)=>{
       if (contact.key === key) {return contact}
     })
     // dispatch clicked:
     //store.dispatch(clicked(personIndex, this.porps.contact));
-    this.props.onClick(personIndex);
+    this.props.onClick(exersiseIndex);
 
 
 
@@ -38,28 +39,31 @@ class MyListComponent extends Component {
   }
 
 render() {
-  var list = this.props.contacts.map((person, index) => {
-    console.log('person is',person)
-    if(person.clicked){
-      return (<li key={person.key} onClick={(event)=>this.showInfo(event, person.key)}>
-      {person.userId}-{person.date}-{person.exersise}-{person.weight}-{person.distance}-{person.time}
+  var list = this.props.contacts.map((exersise, index) => {
+    console.log('person is',exersise)
+    if(exersise.clicked){
+      return (<li key={exersise.key} onClick={(event)=>this.showInfo(event, exersise.key)}>
+      {exersise.userId}-{exersise.date}-{exersise.exersise}-{exersise.weight}-{exersise.distance}-{exersise.time}
       <Link to={'/edit/' + index}>Edit</Link>
-      <Link to={'/delete/' + person.key}>Delete</Link>
+      <Link to={'/delete/' + exersise.key}>Delete</Link>
       </li>)
     } else {
-      return (<li key={person.key} onClick={(event)=>this.showInfo(event, person.key)}>
-      {person.key}-{person.userId}
+      return (<li key={exersise.key} onClick={(event)=>this.showInfo(event, exersise.key)}>
+      {exersise.key}-{exersise.userId}
       <Link to={'/edit/' + index}>Edit</Link>
-      <Link to={'/delete/' + person.key}>Delete</Link>
+      <Link to={'/delete/' + exersise.key}>Delete</Link>
       </li>)
     }
   })
   return (
-    <div>
+  <div className = "mid">
+    <h1> Workout data </h1>
+    <div className = "list">
       <ul>
         {list}
       </ul>
     </div>
+  </div>
   );
 }
 }
