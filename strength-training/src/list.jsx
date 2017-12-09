@@ -27,31 +27,31 @@ class MyListComponent extends Component {
     let exersiseIndex = this.props.contacts.findIndex((contact)=>{
       if (contact.key === key) {return contact}
     })
-    // dispatch clicked:
-    //store.dispatch(clicked(personIndex, this.porps.contact));
     this.props.onClick(exersiseIndex);
 
-
-
-    //let tempState = this.props.contacts
-    //tempState[personIndex].clicked = !tempState[personIndex].clicked
-    //this.setState({contacts: tempState})
   }
 
 render() {
   var list = this.props.contacts.map((exersise, index) => {
     console.log('person is',exersise)
     if(exersise.clicked){
-      return (<li key={exersise.key} onClick={(event)=>this.showInfo(event, exersise.key)}>
-      {exersise.userId}-{exersise.date}-{exersise.exersise}-{exersise.weight}-{exersise.distance}-{exersise.time}
-      <Link to={'/edit/' + index}>Edit</Link>
-      <Link to={'/delete/' + exersise.key}>Delete</Link>
+      return (<li key={exersise.exersise} onClick={(event)=>this.showInfo(event, exersise.key)}>
+      <p> Workout: {exersise.userId} Date: {exersise.date} Exersise: {exersise.exersise} Weight: {exersise.weight} Distance: {exersise.distance} Time: {exersise.time}</p>
+      <Link to={'/edit/' + index}>Edit: </Link>
+      <Link to={'/delete/' + exersise.key}>Delete: </Link>
       </li>)
     } else {
-      return (<li key={exersise.key} onClick={(event)=>this.showInfo(event, exersise.key)}>
-      {exersise.key}-{exersise.userId}
-      <Link to={'/edit/' + index}>Edit</Link>
-      <Link to={'/delete/' + exersise.key}>Delete</Link>
+      return (<li className = "list1" key={exersise.exersise} onClick={(event)=>this.showInfo(event, exersise.key)}>
+      {exersise.exersise}
+      <div className = "button1">
+      <Link to={'/edit/' + index}>
+          <RaisedButton label = "Edit" />
+
+      </Link>
+      <Link to={'/delete/' + exersise.key}>
+      <RaisedButton label = "Delete" /></Link>
+      </div>
+
       </li>)
     }
   })

@@ -11,9 +11,11 @@ import IconButton from 'material-ui/IconButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import ListExampleFolder from './cover';
 import MyForm from './myform';
+import MyDelete from './delete';
 import MyList from './list';
 import startpng from './start.png';
 import Picture from './picture';
+import Pic from './frontPic';
 import Nav from './nav';
 
 
@@ -48,12 +50,14 @@ class App extends Component {
       <MuiThemeProvider muiTheme={theme}>
         <BrowserRouter>
           <Picture>
-            <div>
+            <div ClassName = "total">
               <AppBar onLeftIconButtonClick={(e) => this.show_menu(e)} iconElementLeft={this.state.show_menu ? <ListExampleFolder /> : <IconButton><MoreVertIcon /></IconButton> } title="Strength and Training"/>
               <Switch>
-                <Route exact path="/" />
+                <Route exact path="/" component={Pic}/>
                 <Route path="/add" component={MyForm}/>
                 <Route path="/list" component={MyList}/>
+                <Route path="/edit/:id" component={MyForm}/>
+                <Route path="/delete/:id" component={MyDelete}/>
                 <Route component={NoMatch}/>
               </Switch>
             </div>

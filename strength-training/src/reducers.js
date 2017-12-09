@@ -128,6 +128,7 @@
         }
       }
 
+
       const contactApp = combineReducers({
         visibilityFilter: visibilityFilter,
         contacts: contacts,

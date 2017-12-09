@@ -19,18 +19,17 @@ const ListExampleFolder = () => (
 <div className = "link">
      <Nav/>
 
-    <Divider inset={true} />
     <Link to={'/list'}>
-    <List>
-      <Subheader inset={true}>Training</Subheader>
-      <ListItem
-        leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={blue500} />}
-        rightIcon={<ActionInfo />}
-        primaryText="Workout Data"
-        secondaryText="Jan 20, 2014"
-      />
-    </List>
+        <ListItem
+          primaryText="Workout Data"
+        />
     </Link>
+    <Link to={'/add'}>
+        <ListItem
+          primaryText="Workout Form"
+        />
+    </Link>
+
 
 </div>
 );

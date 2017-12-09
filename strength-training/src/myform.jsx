@@ -10,6 +10,9 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import database, {User} from './database';
+//import DatePickerControlled from './date';
+import DatePicker from 'material-ui/DatePicker';
+import {Link} from 'react-router-dom';
 
 
 class MyFormComponent extends Component {
@@ -25,7 +28,7 @@ class MyFormComponent extends Component {
       this.state = {...this.props.contacts[this.index]};
     } else {
       this.state = {
-        key: uid(), userId: "", date: 'NONE', exersise: 'NONE', weight: 'lbs', distance:'', time: 'number',
+        key: uid(), userId: "", date: '', exersise: '', weight: '', distance:'', time: '',
       };
     }
   }
@@ -37,8 +40,13 @@ class MyFormComponent extends Component {
 
 
   update_state(event, key) {
-    console.log(event.target);
+    console.log(event);
     this.setState({[key]: event.target.value});
+  }
+
+  update_date(date) {
+    console.log(date);
+    this.setState({date: date});
   }
 
 
@@ -50,7 +58,7 @@ class MyFormComponent extends Component {
 
     event.preventDefault();
 
-    this.props.onSubmit({key: uid(), userId: this.state.userId, date: this.state.date, exersise: this.state.exersise, weight: this.state.weight, distance: this.state.distance, clicked: false});
+    this.props.onSubmit({key: uid(), userId: this.state.userId, date: this.state.date.toString(), exersise: this.state.exersise, weight: this.state.weight, distance: this.state.distance, time: this.state.time, clicked: false});
     this.props.history.push("/");
   }
 
@@ -61,18 +69,19 @@ updateExersise(event) {
   }
 
   render() {
+    console.log('date is', this.state.date)
     return (
       <div className="card">
         <Card className="md-card">
           <form onSubmit={event => this.handle_submit(event)}>
             <CardTitle title="Workout Form" subtitle=""/>
             <CardText>
-              <TextField floatingLabelText="User Id"
+              <TextField floatingLabelText="Workout Name"
                 defaultValue={this.state.userId}
                 onChange={event => this.update_state(event, 'userId')}/>
-              <TextField floatingLabelText="date"
+              <DatePicker floatingLabelText="date"
                 defaultValue={this.state.date}
-                onChange={event => this.update_state(event, 'date')}/>
+                onChange={(event, d) => this.update_date(d)}/>
               <TextField floatingLabelText="Exersise"
                 defaultValue={this.state.exersise}
                 onChange={event => this.update_state(event, 'exersise')}/>
@@ -91,8 +100,10 @@ updateExersise(event) {
 
             </CardText>
             <CardActions>
+            <Link to={'/list'}>
               <RaisedButton type="submit" label="Add" primary={true}/>
               <RaisedButton label="Update" primary={true} onClick={event => this.updateExersise(event)}/>
+            </Link>
             </CardActions>
           </form>
         </Card>

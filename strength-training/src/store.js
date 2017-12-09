@@ -15,6 +15,8 @@ function save_to_firebase () {
   }
 }
 
+var UNSUBSCRIBE = null;
+
 firebase.auth()
   .onAuthStateChanged(function(user) {
     if (user) {
@@ -26,15 +28,20 @@ firebase.auth()
         console.log(contacts.val());
         store.dispatch(initContact(contacts.val() || []));
         store.dispatch(retrieved());
+        UNSUBSCRIBE = store.subscribe(save_to_firebase);
       });
     } else {
       // dispatch logout action
+      // store.subscribe(save_to_firebase);
+      if (UNSUBSCRIBE) {
+        UNSUBSCRIBE();
+        UNSUBSCRIBE = null;
+      }
       store.dispatch(initContact([]));
       store.dispatch(loggedOut());
 
     }
   });
 
-store.subscribe(save_to_firebase);
 
 export default store;

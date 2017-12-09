@@ -37,8 +37,6 @@ class Nav extends Component {
 log_out(){
   firebase.auth().signOut().then(() => {
     console.log("log out sucessfull");
-    //let tempstate = !this.state.logged_in;
-    //this.setState({logged_in: tempstate});
     this.props.logout();
   }).catch(function(error) {
     console.log("log out failed", error);
@@ -51,11 +49,8 @@ log_out(){
     if (this.props.user.uid) {
       return(
         <List>
-        <Link to={'/add'}>
-          <Subheader inset={true}>Please Sign In</Subheader>
+        <Link to={'/'}>
           <ListItem
-            leftAvatar={<Avatar icon={<FileFolder />} />}
-            rightIcon={<ActionInfo />}
             primaryText="Logout"
             onClick={() => this.log_out()}
           />
@@ -68,8 +63,6 @@ log_out(){
     <List>
       <Link to={'/add'}>
       <ListItem
-        leftAvatar={<Avatar icon={<FileFolder />} />}
-        rightIcon={<ActionInfo />}
         primaryText="Login"
         onClick={() => this.login()}
       />
