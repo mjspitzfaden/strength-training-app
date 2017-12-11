@@ -30,6 +30,15 @@ firebase.auth()
         store.dispatch(retrieved());
         UNSUBSCRIBE = store.subscribe(save_to_firebase);
       });
+      // axios.get('/contacts')
+      //   .then(function (response) {
+      //     var contacts = response.data.contacts;
+      //
+      //     store.dispatch(initContact(contacts || []));
+      //     store.dispatch(retrieved());
+      //     UNSUBSCRIBE = store.subscribe(save_to_db);
+      //   })
+      //   .catch();
     } else {
       // dispatch logout action
       // store.subscribe(save_to_firebase);
